@@ -23,5 +23,3 @@ with DAG(
         
        
     )
-
-# fetch_data
