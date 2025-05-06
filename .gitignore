@@ -1,0 +1,12 @@
+# Ignore les fichiers de logs Airflow
+airflow/logs/
+# Ignore la base de données de Airflow et autres fichiers temporaires
+airflow/pgdata/
+# Ignore l'environnement virtuel
+venv/
+# Ignore les fichiers de logs
+*.log
+# Ignore les fichiers de checkpoint pour Jupyter
+.ipynb_checkpoints/
+# Ignore les fichiers de cache Python
+__pycache__/
