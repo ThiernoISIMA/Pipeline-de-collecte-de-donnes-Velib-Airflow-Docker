@@ -1,0 +1,30 @@
+[2025-05-06T09:15:04.178+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: velib_fetch_data.fetch_velib_data scheduled__2025-05-06T09:00:00+00:00 [queued]>
+[2025-05-06T09:15:04.195+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: velib_fetch_data.fetch_velib_data scheduled__2025-05-06T09:00:00+00:00 [queued]>
+[2025-05-06T09:15:04.196+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-05-06T09:15:04.226+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): fetch_velib_data> on 2025-05-06 09:00:00+00:00
+[2025-05-06T09:15:04.231+0000] {standard_task_runner.py:60} INFO - Started process 229 to run task
+[2025-05-06T09:15:04.237+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'velib_fetch_data', 'fetch_velib_data', 'scheduled__2025-05-06T09:00:00+00:00', '--job-id', '118', '--raw', '--subdir', 'DAGS_FOLDER/velib_fetch_dag.py', '--cfg-path', '/tmp/tmpen06gy46']
+[2025-05-06T09:15:04.240+0000] {standard_task_runner.py:88} INFO - Job 118: Subtask fetch_velib_data
+[2025-05-06T09:15:04.964+0000] {task_command.py:423} INFO - Running <TaskInstance: velib_fetch_data.fetch_velib_data scheduled__2025-05-06T09:00:00+00:00 [running]> on host 5fdd72692c9b
+[2025-05-06T09:15:05.951+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='velib_fetch_data' AIRFLOW_CTX_TASK_ID='fetch_velib_data' AIRFLOW_CTX_EXECUTION_DATE='2025-05-06T09:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-05-06T09:00:00+00:00'
+[2025-05-06T09:15:05.952+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-05-06T09:15:05.954+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python /opt/***/dags/scripts/fetch_data.py']
+[2025-05-06T09:15:05.963+0000] {subprocess.py:86} INFO - Output:
+[2025-05-06T09:15:10.181+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2025-05-06T09:15:10.183+0000] {subprocess.py:93} INFO -   File "/opt/***/dags/scripts/fetch_data.py", line 15, in <module>
+[2025-05-06T09:15:10.194+0000] {subprocess.py:93} INFO -     API_KEY = Variable.get("API_KEY")
+[2025-05-06T09:15:10.197+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.10/site-packages/***/models/variable.py", line 143, in get
+[2025-05-06T09:15:10.198+0000] {subprocess.py:93} INFO -     raise KeyError(f"Variable {key} does not exist")
+[2025-05-06T09:15:10.200+0000] {subprocess.py:93} INFO - KeyError: 'Variable API_KEY does not exist'
+[2025-05-06T09:15:11.325+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-05-06T09:15:12.589+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-05-06T09:15:12.606+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=velib_fetch_data, task_id=fetch_velib_data, execution_date=20250506T090000, start_date=20250506T091504, end_date=20250506T091512
+[2025-05-06T09:15:12.756+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 118 for task fetch_velib_data (Bash command failed. The command returned a non-zero exit code 1.; 229)
+[2025-05-06T09:15:12.785+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-05-06T09:15:13.430+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
