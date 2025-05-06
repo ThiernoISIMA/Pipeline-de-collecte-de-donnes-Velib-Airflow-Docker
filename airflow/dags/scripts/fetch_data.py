@@ -5,13 +5,13 @@ import pandas as pd
 import requests
 import json
 import os    
-from dotenv import load_dotenv
+from dotenv import load_dotenv  
 from airflow.models import Variable
 from datetime import datetime, timedelta
 
 load_dotenv()
 
-# Récupération de la clé API depuis le fichier .env
+# Récupération de la clé API depuis airflow 
 API_KEY = Variable.get("API_KEY")
 CONTRACT_NAME = os.getenv("CONTRACT_NAME")
 # Récupération de l'URL de l'API JCDecaux
@@ -38,7 +38,6 @@ def fetch_data() :
         os.makedirs("data")
     # nom du fichier de sortie
     filename = f"data/stations_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.csv"
-    # filename = f"/opt/airflow/dags/data/stations_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.csv"
 
     df.to_csv(filename, index=False)
     print(f"Les données ont été enregistrées dans le fichier {filename}")
