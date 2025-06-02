@@ -1,6 +1,6 @@
 # mon pipeline DAG
 from airflow import DAG
-from airflow.operators.bash import BashOperator
+from airflow.operators.bash_operator import BashOperator # type: ignore
 from datetime import datetime, timedelta
 
 default_args = {
@@ -18,8 +18,26 @@ with DAG(
     catchup=False,
 ) as dag:
     
-     fetch_data = BashOperator(
-        task_id='fetch_velib_data',bash_command='python /opt/airflow/dags/scripts/fetch_data.py'
-        
-       
+    fetch_data = BashOperator(
+        task_id='fetch_velib_data',
+        bash_command='python "/opt/airflow/dags/scripts/fetch_data.py"'
     )
+    clean_data = BashOperator(
+        task_id='clean_velib_data',
+        bash_command='python "/opt/airflow/dags/scripts/clean_data.py"'
+    )
+    transform_data = BashOperator(
+        task_id='transform_velib_data',
+        bash_command='python /opt/airflow/dags/scripts/transform_data.py'
+    )
+    save_final_csv = BashOperator(
+        task_id='save_final_csv',
+        bash_command='python /opt/airflow/dags/scripts/save_final.py'
+    )
+
+    # order des tâches
+    fetch_data >> clean_data >> transform_data >> save_final_csv  # type: ignore
+
+     
+
+    
